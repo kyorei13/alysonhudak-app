@@ -22,8 +22,8 @@ http://maven.apache.org/maven-v4_0_0.xsd">
           <configuration>
             <compilerArgument>-Xlint</compilerArgument>
             <encoding>${project.build.sourceEncoding}</encoding>
-            <source>1.9</source>
-            <target>1.9</target>
+            <source>1.8</source>
+            <target>1.8</target>
           </configuration>
         </plugin>
       </plugins>
