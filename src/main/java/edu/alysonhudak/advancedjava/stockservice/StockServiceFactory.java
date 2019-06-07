@@ -1,0 +1,28 @@
+package edu.alysonhudak.advancedjava.stockservice;
+
+/**
+ * Returns a concrete implementations of the interface
+ *
+ * @author Alyson Hudak
+ */
+
+public class StockServiceFactory {
+
+    private StockServiceFactory() {}
+
+    private static StockService service;
+
+    /**
+     *
+     * @return
+     */
+    public static StockService getInstance() {
+
+        synchronized (StockServiceFactory.class) {
+            if (service == null) {
+                service = new BasicStockService();
+            }
+            return service;
+        }
+    }
+}
