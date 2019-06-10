@@ -11,11 +11,16 @@ import java.util.Date;
  */
 
 public class StockQuote {
-
+    //Stock properties
     private String stockSymbol;
     private BigDecimal stockPrice;
-    private Date  transactionDate;
+    private Date transactionDate;
 
+    /**
+     * Create a new  StockData instance
+     * @param stockSymbol the stock symbol e.g. APPL (for APPLE)
+     * @param stockPrice the price for stock created
+     */
     public StockQuote(String stockSymbol, BigDecimal stockPrice, Date transactionDate) {
         this.stockSymbol = stockSymbol;
         this.stockPrice = stockPrice;
@@ -26,10 +31,19 @@ public class StockQuote {
         return stockSymbol;
     }
 
+    /**
+     *
+     * @return the stock price.
+     * e.g. APPL for APPLE
+     */
     public BigDecimal getStockPrice() {
         return stockPrice;
     }
 
+    /**
+     *
+     * @return the date of the stock price.
+     */
     public Date getTransactionDate() {
         return transactionDate;
     }

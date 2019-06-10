@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 /**
  * A edu.alysonhudak.advancedjava.stockservice.BasicStockService Class that has a method that returns an instance of edu.alysonhudak.advancedjava.model.StockQuote
+ * based on date range passed in
  *
  * @author Alyson Hudak
  */
