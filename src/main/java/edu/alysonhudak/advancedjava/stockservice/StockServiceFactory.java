@@ -14,7 +14,7 @@ public class StockServiceFactory {
 
     /**
      *
-     * @return
+     * @return a basic stock service
      */
     public static StockService getInstance() {
 

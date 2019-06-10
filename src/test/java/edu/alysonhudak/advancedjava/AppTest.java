@@ -29,10 +29,20 @@ public class AppTest
     }
 
     /**
-     * Rigourous Test :-)
+     * Rigourous Test
      */
     public void testApp()
     {
         assertTrue( true );
     }
+
+    /**
+     * Negative Test of main method, of class StockQuoteApplication.
+     */
+    @Test(expected=NullPointerException.class)
+    public void testMainNegative() throws Exception {
+        String[] args = null;
+        AppTest.main(args);
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 }
