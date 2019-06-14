@@ -3,11 +3,10 @@ package edu.alysonhudak.advancedjava;
 import edu.alysonhudak.advancedjava.model.StockQuote;
 import edu.alysonhudak.advancedjava.stockservice.StockService;
 import edu.alysonhudak.advancedjava.stockservice.StockServiceFactory;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 /**
@@ -20,8 +19,7 @@ public class StockQuoteApp {
      *
      * @param args
      */
-    public static void main( String[] args ) throws ParseException
-    {
+    public static void main(String[] args) throws ParseException {
         System.out.println(args[0]);
 
         int listNumber = getNumberInList();
@@ -29,7 +27,7 @@ public class StockQuoteApp {
 
     }
 
-    public static int getNumberInList(){
+    public static int getNumberInList() {
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -46,12 +44,12 @@ public class StockQuoteApp {
         try {
 
             Date date = formatter.parse(dateInString);
-            StockService stockservice = StockServiceFactory.getStock();
-            System.out.println(stockservice.getQuote("APPL", date).getDateRecorded());
+            StockService stockservice = StockServiceFactory.getInstance();
+            System.out.println(stockservice.getQuote("APPL", Calendar.getInstance(),Calendar.getInstance()));
 
 
         } catch (ParseException e) {
-            System.out.println( "Error in dates" );
+            System.out.println("Error in dates");
         }
 
 
@@ -67,7 +65,7 @@ public class StockQuoteApp {
             Calendar calendar2 = Calendar.getInstance(); //get instance of calender
             calendar2.setTime(date2); //set calendar time to end date from params
 
-            StockService stockservice = StockServiceFactory.getStock();
+            StockService stockservice = StockServiceFactory.getInstance();
 
             List<StockQuote> listOfStocks = new ArrayList();
 
@@ -82,9 +80,9 @@ public class StockQuoteApp {
 
 
         } catch (ParseException e) {
-            System.out.println( "Error in dates" );
+            System.out.println("Error in dates");
         }
 
         return 0;
-
     }
+}

@@ -2,6 +2,9 @@ package edu.alysonhudak.advancedjava.stockservice;
 
 import edu.alysonhudak.advancedjava.model.StockQuote;
 
+import java.util.Calendar;
+import java.util.List;
+
 /**
  *
  */
