@@ -17,5 +17,5 @@ public class BasicStockServiceTest {
         String industry = "edu.alysonhudak.advancedjava.Tech";
         String name = "MICR";
         StockQuote expResult = null;
-     }
+    }
 }

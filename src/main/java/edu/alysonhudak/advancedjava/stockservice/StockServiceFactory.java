@@ -8,12 +8,12 @@ package edu.alysonhudak.advancedjava.stockservice;
 
 public class StockServiceFactory {
 
-    private StockServiceFactory() {}
+    private StockServiceFactory() {
+    }
 
     private static StockService service;
 
     /**
-     *
      * @return a basic stock service
      */
     public static StockService getInstance() {
