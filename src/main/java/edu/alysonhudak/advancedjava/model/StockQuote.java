@@ -11,6 +11,7 @@ import java.util.Date;
  */
 
 public class StockQuote {
+
     //Stock properties
     private String stockSymbol;
     private BigDecimal stockPrice;
