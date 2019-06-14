@@ -12,7 +12,7 @@ public interface StockService {
 
     /**
      * Return the price of a share of stock  for the given symbol
-     * 
+     *
      * @param symbol represents the stock symbol name
      * @return a <CODE>edu.alysonhudak.advancedjava.model.StockQuote</CODE> instance
      */
@@ -22,8 +22,8 @@ public interface StockService {
      * get a historical list of stock quotes based on date range
      *
      * @param symbol represents the stock symbol name
-     * @param from date of first stock
-     * @param until date of last stock quote
+     * @param from   date of first stock
+     * @param until  date of last stock quote
      * @return a list of StockQuote Instances
      * one for each day in date range
      */

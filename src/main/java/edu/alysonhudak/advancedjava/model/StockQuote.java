@@ -11,6 +11,7 @@ import java.util.Date;
  */
 
 public class StockQuote {
+
     //Stock properties
     private String stockSymbol;
     private BigDecimal stockPrice;
@@ -18,8 +19,9 @@ public class StockQuote {
 
     /**
      * Create a new  StockData instance
+     *
      * @param stockSymbol the stock symbol e.g. APPL (for APPLE)
-     * @param stockPrice the price for stock created
+     * @param stockPrice  the price for stock created
      */
     public StockQuote(String stockSymbol, BigDecimal stockPrice, Date transactionDate) {
         this.stockSymbol = stockSymbol;
@@ -32,7 +34,6 @@ public class StockQuote {
     }
 
     /**
-     *
      * @return the stock price.
      * e.g. APPL for APPLE
      */
@@ -41,7 +42,6 @@ public class StockQuote {
     }
 
     /**
-     *
      * @return the date of the stock price.
      */
     public Date getTransactionDate() {

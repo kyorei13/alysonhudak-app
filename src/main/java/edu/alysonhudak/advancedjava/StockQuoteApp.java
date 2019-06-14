@@ -45,7 +45,7 @@ public class StockQuoteApp {
 
             Date date = formatter.parse(dateInString);
             StockService stockservice = StockServiceFactory.getInstance();
-            System.out.println(stockservice.getQuote("APPL", Calendar.getInstance(),Calendar.getInstance()));
+            System.out.println(stockservice.getQuote("APPL", Calendar.getInstance(), Calendar.getInstance()));
 
 
         } catch (ParseException e) {
