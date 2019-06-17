@@ -8,25 +8,27 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 
 /**
+ * Simple tests as the more developed tests are included in the other test classes.
  *
  * @author Alyson Hudak
  */
 
-public class StockServiceFactoryTest 
-{
- 
+public class StockServiceFactoryTest {
 
-
-    /**
-     * Positive Test of getStock method, of class edu.alysonhudak.advancedjava.stockservice.StockServiceFactory.
-     */
+    /* Positive test of the Stock Factory*/
     @Test
-    public void testGetStockPositive() 
-    {
-            StockService stockService = StockServiceFactory.getInstance();
-            assertNotNull("Verify StockServiceFactory does not return  null", stockService);
+    public void testGetStockPostive() {
+        StockService expResult = null;
+        StockService result = StockServiceFactory.getStock();
+        assertNotNull("Stock factory works", result);
+    }
 
-     }
-    
+    /* Negative test of the Stock Factory*/
+    @Test
+    public void testGetStockNegative() {
+        StockService expResult = null;
+        StockService result = StockServiceFactory.getStock();
+        assertFalse("Stock factory works with null", result == expResult);
+    }
 
 }

@@ -2,6 +2,7 @@ package edu.alysonhudak.advancedjava.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * This class contains information about a stock.
@@ -10,16 +11,19 @@ import java.util.Date;
  * @author Alyson Hudak
  */
 
+@Immutable
+
 public class StockQuote {
     //Stock properties
-    private String stockSymbol;
-    private BigDecimal stockPrice;
-    private Date transactionDate;
+    private final String stockSymbol;
+    private final BigDecimal stockPrice;
+    private final Date transactionDate;
 
     /**
      * Create a new  StockData instance
      * @param stockSymbol the stock symbol e.g. APPL (for APPLE)
      * @param stockPrice the price for stock created
+     * @param transactionDate that the stock is recorded
      */
     public StockQuote(String stockSymbol, BigDecimal stockPrice, Date transactionDate) {
         this.stockSymbol = stockSymbol;
@@ -27,15 +31,21 @@ public class StockQuote {
         this.transactionDate = transactionDate;
     }
 
-    public String getStockSymbol() {
-        return stockSymbol;
-    }
+    /**
+     *
+     * set the price of a stock in the concrete implementation
+     * @param price of that stock
+     */
+//    public void setStockPrice(Double price) {
+//        this.stockPrice = price;
+//    }
 
     /**
      *
      * @return the stock price.
      * e.g. APPL for APPLE
      */
+
     public BigDecimal getStockPrice() {
         return stockPrice;
     }
