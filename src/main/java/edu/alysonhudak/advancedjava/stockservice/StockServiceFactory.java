@@ -1,8 +1,5 @@
 package edu.alysonhudak.advancedjava.stockservice;
 
-import edu.alysonhudak.advancedjava.BasicStockService;
-import edu.alysonhudak.advancedjava.StockService;
-
 /**
  * Returns a concrete implementation of the interface
  *

@@ -1,16 +1,13 @@
 package edu.alysonhudak.advancedjava;
 
 import edu.alysonhudak.advancedjava.model.StockQuote;
-import org.junit.Test;
+import edu.alysonhudak.advancedjava.stockservice.BasicStockService;
+import edu.alysonhudak.advancedjava.stockservice.IntervalEnum;
+import junit.framework.TestCase;
+
 import java.util.Calendar;
 import java.util.Date;
-import static java.util.EnumSet.of;
 import java.util.List;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import junit.framework.TestCase;
-import static junit.framework.Assert.assertNull;
 
 
 /**
@@ -18,7 +15,7 @@ import static junit.framework.Assert.assertNull;
  */
 
 public class BasicStockServiceTest extends TestCase {
-    private Date startDate = new Date();
+    private final Date startDate = new Date();
 
     /**
      * Positive Test of the first getQuote method, of class BasicStockService.
@@ -65,7 +62,7 @@ public class BasicStockServiceTest extends TestCase {
 
         String symbol = "Test";
 
-        edu.alysonhudak.advancedjava.BasicStockService instance = new edu.alysonhudak.adancedjava.BasicStockService();
+        BasicStockService instance = new BasicStockService();
         List<StockQuote> result = instance.getQuote(symbol, from, until, intveralTime);
         assertNotNull("second getQuote is not null", result);
         assertTrue("tird getQuote returns correct list", result.size() <= 2);
@@ -76,9 +73,9 @@ public class BasicStockServiceTest extends TestCase {
      */
     public void testGetQuoteFirstMethodNegative() {
         String symbol = "Name";
-        BasicStockService instance = new BasicStockService();
-        StockQuote result = instance.getQuote(null, null);
-        assertNull("getQuote is null", result.getDateRecorded());
+        BasicStockService basicStockService = new BasicStockService();
+        StockQuote stockQuote = basicStockService.getQuote(null, null);
+        assertNull("getQuote is null", stockQuote.getTransactionDate());
     }
 
     /**
@@ -116,7 +113,7 @@ public class BasicStockServiceTest extends TestCase {
 
         String symbol = "Test";
 
-        edu.alysonhudak.advancedjava.BasicStockService instance = new edu.alysonhudak.advancedjava.BasicStockService();
+       BasicStockService instance = new BasicStockService();
         List<StockQuote> result = instance.getQuote(symbol, from, until, IntervalEnum.Days);
 
         assertFalse("third getQuote returns incorrect list", result.size() <= 2);

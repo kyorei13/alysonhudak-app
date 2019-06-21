@@ -1,8 +1,10 @@
 package edu.alysonhudak.advancedjava.stockservice;
 
-import java.util.List;
+import edu.alysonhudak.advancedjava.model.StockQuote;
+
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
     /**
      * This interface describes API for getting stock data.
@@ -27,8 +29,8 @@ import java.util.Date;
          * get a historical list of stock quotes based on date range
          *
          * @param symbol represents the stock symbol name
-         * @param the from date of first stock
-         * @param the until date of last stock quote
+         * @param from from date of first stock
+         * @param until until date of last stock quote
          * @param interval specifies the frequency of the stock requested
          * @return a list of StockQuote Instances
          * one for each day in date range

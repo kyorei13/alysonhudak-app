@@ -9,9 +9,9 @@ import java.util.Date;
  * This function parses a date string into the appropriate format.
  * @author Alyson Hudak
  */
-public class DateParser {
+class DateParser {
 
-    public static Calendar getDateParsed(String dateInString){
+    public static Calendar getDateParsed(String dateInString) {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar = Calendar.getInstance();
@@ -26,10 +26,10 @@ public class DateParser {
             Calendar calendar2 = Calendar.getInstance(); //get instance of calender
             //calendar2.setTime(date2); //set calender time to end date from params}
             return calendar;
-        }
-        catch (ParseException e) {
-            System.out.println( "Error in dates." );
+        } catch (ParseException e) {
+            System.out.println("Error in dates.");
         }
         return calendar;
 
     }
+}

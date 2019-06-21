@@ -1,13 +1,11 @@
 package edu.alysonhudak.advancedjava;
 
+import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit test for the simple StockQuoteApp.
@@ -22,7 +20,7 @@ public class StockServiceApplicationTest {
     @Test(expected=NullPointerException.class)
     public void testMainNegative() throws Exception {
         String[] args = null;
-        StockServiceApplication.main(args);
+        StockQuoteApp.main(args);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
     }
@@ -37,7 +35,7 @@ public class StockServiceApplicationTest {
         String date1 = "01/01/1999";
         String date2 = "12/31/2001";
         int expResult = 0;
-        int result = StockServiceApplication.getNumberInList(date2, date1);
+        int result = StockQuoteApp.getNumberInList(date2, date1);
         assertEquals(expResult, result);
     }
 }

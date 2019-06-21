@@ -1,8 +1,8 @@
 package edu.alysonhudak.advancedjava.model;
 
+import javax.annotation.concurrent.Immutable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.annotation.concurrent.Immutable;
 
 /**
  * This class contains information about a stock.
@@ -30,15 +30,6 @@ public class StockQuote {
         this.stockPrice = stockPrice;
         this.transactionDate = transactionDate;
     }
-
-    /**
-     *
-     * set the price of a stock in the concrete implementation
-     * @param price of that stock
-     */
-//    public void setStockPrice(Double price) {
-//        this.stockPrice = price;
-//    }
 
     /**
      *
