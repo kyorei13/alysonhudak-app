@@ -1,40 +1,46 @@
 package edu.alysonhudak.advancedjava;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import edu.alysonhudak.advancedjava.model.StockQuote;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
+
 /**
+ * JUnit test for the StockQuote class
  *
  * @author Alyson Hudak
  */
-public class StockQuoteTest
-{
-    private StockQuote sampleStock;
-    
-    
+public class StockQuoteTest {
+
+    private BigDecimal price;
+    private Date date;
+    private String symbol;
+    private StockQuote stockQuote;
+
     @Before
-    public void setup() 
-    {
-     }
-    
-    /**
-     * Positive Test of Constructor method, of class edu.alysonhudak.advancedjava.model.StockQuote.
-     */
-    @Test
-    public void testConstructorPricePostive() {
-        StockQuote instance = sampleStock;
-        assertNull("stockQuote instance is not null", instance);
+    public void setUp() {
+        price = new BigDecimal(100);
+        date = Calendar.getInstance().getTime();
+        symbol = "APPL";
+        stockQuote = new StockQuote(price, date, symbol);
     }
 
+    @Test
+    public void testGetPrice() {
+        assertEquals("The stock price is correct.", price, stockQuote.getPrice());
+    }
 
+    @Test
+    public void testGetDate() {
+        assertEquals("The stock date is correct.", date, stockQuote.getDate());
+    }
 
-
-
-
+    @Test
+    public void testGetSymbol() {
+        assertEquals(" The symbol is correct", symbol, stockQuote.getSymbol());
+    }
 }

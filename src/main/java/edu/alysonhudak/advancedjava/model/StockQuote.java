@@ -10,50 +10,56 @@ import java.util.Date;
  * @author Alyson Hudak
  */
 
-public class StockQuote {
-    //Stock properties
-    private String stockSymbol;
-    private BigDecimal stockPrice;
-    private Date transactionDate;
+@Immutable
+
+public class StockQuote extends StockData {
+
+    private BigDecimal price;
+    private Date date;
+    private String symbol;
 
     /**
-     * Create a new  StockData instance
-     * @param stockSymbol the stock symbol e.g. APPL (for APPLE)
-     * @param stockPrice the price for stock created
-     */
-    public StockQuote(String stockSymbol, BigDecimal stockPrice, Date transactionDate) {
-        this.stockSymbol = stockSymbol;
-        this.stockPrice = stockPrice;
-        this.transactionDate = transactionDate;
-    }
-
-    public String getStockSymbol() {
-        return stockSymbol;
-    }
-
-    /**
+     * Create a new instance of a StockQuote.
      *
-     * @return the stock price.
-     * e.g. APPL for APPLE
+     * @param price  the stock price for the given date
+     * @param date   the date of the stock price
+     * @param symbol the stock symbol.
      */
-    public BigDecimal getStockPrice() {
-        return stockPrice;
+    public StockQuote(BigDecimal price, Date date, String symbol) {
+        super();
+        this.price = price;
+        this.date = date;
+        this.symbol = symbol;
     }
 
     /**
-     *
-     * @return the date of the stock price.
+     * @return Get the stock price for the given date.
      */
-    public Date getTransactionDate() {
-        return transactionDate;
+    BigDecimal getPrice() {
+        return price;
+    }
+
+    /**
+     * @return The date of the stock price
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @return The stock symbol.
+     */
+    public String getSymbol() {
+        return symbol;
     }
 
     @Override
     public String toString() {
+        String dateString = simpleDateFormat.format(date);
         return "StockQuote{" +
-                "stockSymbol='" + stockSymbol + '\'' +
-                ", stockPrice=" + stockPrice +
-                ", transactionDate=" + transactionDate +
+                "price=" + price +
+                ", date=" + dateString +
+                ", symbol='" + symbol + '\'' +
                 '}';
     }
 }
