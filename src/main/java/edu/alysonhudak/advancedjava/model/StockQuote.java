@@ -2,6 +2,8 @@ package edu.alysonhudak.advancedjava.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.apache.http.annotation.Immutable;
 
 /**
  * This class contains information about a stock.
@@ -25,7 +27,7 @@ public class StockQuote extends StockData {
      * @param date   the date of the stock price
      * @param symbol the stock symbol.
      */
-    public StockQuote(BigDecimal price, Date date, String symbol) {
+    public StockQuote(@NotNull BigDecimal price, @NotNull Date date, @NotNull String symbol) {
         super();
         this.price = price;
         this.date = date;
@@ -35,7 +37,7 @@ public class StockQuote extends StockData {
     /**
      * @return Get the stock price for the given date.
      */
-    BigDecimal getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -53,6 +55,11 @@ public class StockQuote extends StockData {
         return symbol;
     }
 
+    /**
+     * This method overrides the toString method to display the attributes of the
+     * StockQuote object as a String
+     * @return String containing attributes of StockQuote object
+     */
     @Override
     public String toString() {
         String dateString = simpleDateFormat.format(date);

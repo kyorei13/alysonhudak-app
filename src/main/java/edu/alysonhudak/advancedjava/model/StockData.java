@@ -9,20 +9,21 @@ import java.text.SimpleDateFormat;
  * @author Alyson Hudak
  */
 
-abstract class StockData {
+public abstract class StockData {
 
     /**
      * Provide a single SimpleDateFormat for consistency
      * and to avoid duplicated code.
      */
-    SimpleDateFormat simpleDateFormat;
+    protected SimpleDateFormat simpleDateFormat;
+
+    public static final String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * Base constructor for StockData classes.
      * Initialize member data that is shared with sub classes.
      */
-    StockData() {
-        simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    public StockData() {
+        simpleDateFormat = new SimpleDateFormat(dateFormat);
     }
-
 }

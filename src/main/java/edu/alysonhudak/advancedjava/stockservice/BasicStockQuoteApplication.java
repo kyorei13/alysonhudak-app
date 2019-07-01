@@ -2,9 +2,10 @@ package edu.alysonhudak.advancedjava.stockservice;
 
 import edu.alysonhudak.advancedjava.model.StockQuery;
 import edu.alysonhudak.advancedjava.model.StockQuote;
-import edu.alysonhudak.advancedjava.StockService;
-import edu.alysonhudak.advancedjava.StockServiceException;
-import edu.alysonhudak.advancedjava.StockServiceFactory;
+import edu.alysonhudak.advancedjava.stockservice.StockService;
+import edu.alysonhudak.advancedjava.stockservice.StockServiceException;
+import edu.alysonhudak.advancedjava.stockservice.StockServiceFactory;
+import edu.alysonhudak.advancedjava.util.Interval;
 
 import java.text.ParseException;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class BasicStockQuoteApplication {
 
-    private StockService stockService;
+    private final StockService stockService;
 
     /**
      * An enumeration that indicates how the program terminates (ends)
@@ -27,7 +28,7 @@ public class BasicStockQuoteApplication {
         ABNORMAL(-1);
 
         // when the program exits, this value will be reported to underlying OS
-        private int statusCode;
+        private final int statusCode;
 
         /**
          * Create a new ProgramTerminationStatusEnum
@@ -35,7 +36,7 @@ public class BasicStockQuoteApplication {
          * @param statusCodeValue the value to return the OS. Success or normal termination is
          * indicated by a value of 0. Any non 0 numbers indicate an abnormal termination.
          */
-        ProgramTerminationStatusEnum(int statusCodeValue) {
+        private ProgramTerminationStatusEnum(int statusCodeValue) {
             this.statusCode = statusCodeValue;
         }
 
@@ -53,22 +54,22 @@ public class BasicStockQuoteApplication {
      * @param stockService the StockService this application should use for stock queries.
      *
      */
-    BasicStockQuoteApplication(StockService stockService) {
+    public BasicStockQuoteApplication(StockService stockService) {
         this.stockService = stockService;
     }
 
     /**
-     * Given a <CODE>stockQuery</CODE> get back the info about the stock to display to the user.
+     * Given a <CODE>stockQuery</CODE> get back a the info about the stock to display to th user.
      *
      * @param stockQuery the stock to get data for.
      * @return a string with the stock data in it.
      * @throws StockServiceException If data about the stock can not be retrieved, a fatal error.
      */
-    String displayStockQuotes(StockQuery stockQuery) throws StockServiceException {
+    public String displayStockQuotes(StockQuery stockQuery) throws StockServiceException {
         StringBuilder stringBuilder = new StringBuilder();
 
         List<StockQuote> stockQuotes =
-                stockService.getQuote(stockQuery.getSymbol(), stockQuery.getFrom(), stockQuery.getUntil());
+                stockService.getQuote(stockQuery.getSymbol(), stockQuery.getFrom(), stockQuery.getUntil(), IntervalEnum.HOUR);
 
         stringBuilder.append("Stock quotes for: " + stockQuery.getSymbol() + "\n");
         for (StockQuote stockQuote : stockQuotes) {
@@ -79,7 +80,7 @@ public class BasicStockQuoteApplication {
     }
 
     /**
-     * Terminates the application.
+     * Terminate the application.
      *
      * @param statusCode        an enum value that indicates if the program terminated alright or not.
      * @param diagnosticMessage A message to display to the user when the program finishes.
@@ -99,7 +100,7 @@ public class BasicStockQuoteApplication {
     /**
      * Run the StockTicker application.
      *
-     * When invoking the program supply one ore more stock symbols.
+     * When invoking the program supply one or more stock symbols.
      *
      * @param args one or more stock symbols
      */
@@ -108,14 +109,15 @@ public class BasicStockQuoteApplication {
         // be optimistic init to positive values
         ProgramTerminationStatusEnum exitStatus = ProgramTerminationStatusEnum.NORMAL;
         String programTerminationMessage = "Normal program termination.";
+
         if (args.length != 3) {
             exit(ProgramTerminationStatusEnum.ABNORMAL,
-                    "Please supply 3 arguments: a stock symbol, a start date (MM/DD/YYYY) and an end date (MM/DD/YYYY)");
+                    "Please supply 4 arguments: a stock symbol, a start date (MM/DD/YYYY), an end date (MM/DD/YYYY), and an interval of time");
         }
         try {
-
-            StockQuery stockQuery = new StockQuery(args[0], args[1], args[2]);
-            StockService stockService = StockServiceFactory.getInstance();
+            IntervalEnum interval = IntervalEnum.valueOf(args[3]);
+            StockQuery stockQuery = new StockQuery(args[0], args[1], args[2], interval);
+            StockService stockService = ServiceFactory.getStockServiceInstance();
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
             basicStockQuoteApplication.displayStockQuotes(stockQuery);
@@ -126,6 +128,9 @@ public class BasicStockQuoteApplication {
         } catch (StockServiceException e) {
             exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
             programTerminationMessage = "StockService failed: " + e.getMessage();
+        } catch (Exception e){
+            exitStatus = ProgramTerminationStatusEnum.ABNORMAL;
+            programTerminationMessage = "Exception encountered: " + e.getMessage();
         }
 
         exit(exitStatus, programTerminationMessage);

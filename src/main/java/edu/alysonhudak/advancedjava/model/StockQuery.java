@@ -1,8 +1,5 @@
 package edu.alysonhudak.advancedjava.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 /**
  * This class contains information about a stock.
  * This class is immutable. It holds stock information for a given point in time.
@@ -10,6 +7,7 @@ import java.util.Date;
  * @author Alyson Hudak
  */
 
+import edu.alysonhudak.advancedjava.Interval;
 import org.apache.http.annotation.Immutable;
 
 import javax.validation.constraints.NotNull;
@@ -25,12 +23,13 @@ import java.util.Calendar;
 @Immutable
 public class StockQuery extends StockData{
 
-    private String symbol;
-    private Calendar from;
-    private Calendar until;
+    private final String symbol;
+    private final Calendar from;
+    private final Calendar until;
+    private final Interval interval;
 
     /**
-     * Creates a new instance from the tring data. This constructor will convert the
+     * Creates a new instance from the string data. This constructor will convert the
      * dates described as a string to date objects.
      *
      * @param symbol the stock symbol
@@ -38,14 +37,14 @@ public class StockQuery extends StockData{
      * @param until  the end date in the form of yyyy/MM/dd
      * @throws ParseException if the format of the date String is incorrect. Forces you to try again until it is correct
      */
-    public StockQuery(@NotNull String symbol, @NotNull String from, @NotNull String until) throws ParseException {
+    public StockQuery(@NotNull String symbol, @NotNull String from, @NotNull String until, @NotNull IntervalEnum interval) throws ParseException {
         super();
         this.symbol = symbol;
         this.from = Calendar.getInstance();
         this.until = Calendar.getInstance();
-        System.out.println(simpleDateFormat);
         this.from.setTime(simpleDateFormat.parse(from));
         this.until.setTime(simpleDateFormat.parse(until));
+        this.interval = IntervalEnum.HOUR;
     }
 
     /**
@@ -67,5 +66,12 @@ public class StockQuery extends StockData{
      */
     public Calendar getUntil() {
         return until;
+    }
+
+    /**
+     * @return get the interval to display quotes for
+     */
+    public Interval getInterval() {
+        return interval;
     }
 }

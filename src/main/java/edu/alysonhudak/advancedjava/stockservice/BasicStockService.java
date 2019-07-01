@@ -1,12 +1,15 @@
 package edu.alysonhudak.advancedjava.stockservice;
 
 import edu.alysonhudak.advancedjava.model.StockQuote;
+import edu.alysonhudak.advancedjava.util.Interval;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.apache.http.annotation.Immutable;
 
 /**
  * An edu.alysonhudak.advancedjava.stockservice.BasicStockService Class that has a method that returns an instance of edu.alysonhudak.advancedjava.model.StockQuote
@@ -14,7 +17,7 @@ import java.util.Date;
  *
  * @author Alyson Hudak
  */
-
+@Immutable
 public class BasicStockService implements StockService {
 
     /**
@@ -26,9 +29,11 @@ public class BasicStockService implements StockService {
      *
      */
     @Override
-    public StockQuote getQuote(String symbol) {
+    public List<StockQuote> getQuote(@NotNull String symbol) throws StockServiceException {
         // a basic implementation.
-        return new StockQuote(new BigDecimal(100), Calendar.getInstance().getTime(), symbol);
+        List<StockQuote> stockQuotes = new ArrayList<>();
+        stockQuotes.add(new StockQuote(new BigDecimal(100), Calendar.getInstance().getTime(), symbol));
+        return stockQuotes;
     }
 
     /**
@@ -42,7 +47,7 @@ public class BasicStockService implements StockService {
      *
      */
     @Override
-    public List<StockQuote> getQuote(String symbol, Calendar from, Calendar until) {
+    public List<StockQuote> getQuote(@NotNull String symbol, @NotNull Calendar from, @NotNull Calendar until) throws StockServiceException{
         // a basic implementation.
         List<StockQuote> stockQuotes = new ArrayList<>();
         Date aDay = from.getTime();

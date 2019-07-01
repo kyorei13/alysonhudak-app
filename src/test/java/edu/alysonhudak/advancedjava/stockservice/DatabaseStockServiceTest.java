@@ -2,12 +2,14 @@ package edu.alysonhudak.advancedjava;
 
 import edu.alysonhudak.advancedjava.model.StockData;
 import edu.alysonhudak.advancedjava.model.StockQuote;
-import edu.alysonhudak.advancedjava.DatabaseStockService;
-import edu.alysonhudak.advancedjava.StockServiceException;
-import edu.alysonhudak.advancedjava.DatabaseInitializationException;
-import edu.alysonhudak.advancedjava.DatabaseUtils;
-import edu.alysonhudak.advancedjava.Interval;
+import edu.alysonhudak.advancedjava.stockservice.DatabaseStockService;
+import edu.alysonhudak.advancedjava.stockservice.StockServiceException;
+import edu.alysonhudak.advancedjava.util.DatabaseInitializationException;
+import edu.alysonhudak.advancedjava.util.DatabaseUtils;
+import edu.alysonhudak.advancedjava.util.Interval;
 
+import org.junit.After;
+import org.junit.Before;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.DateFormat;
@@ -20,10 +22,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 
 /**
- * Unit tests for the DatabaseStockService
+ * The unit tests for the DatabaseStockService
+ *
+ * @author Alyson Hudak
  */
 public class DatabaseStockServiceTest {
 
@@ -34,7 +37,7 @@ public class DatabaseStockServiceTest {
     private DatabaseStockService databaseStockService;
 
     /**
-     * Initialize database through DatabaseUtils class and
+     * Initialize the database through the DatabaseUtils class and then
      * initialize databaseStockService variable to a new instance of DatabaseStockService class
      * @throws DatabaseInitializationException
      */
@@ -45,7 +48,7 @@ public class DatabaseStockServiceTest {
     }
 
     /**
-     * Tests that a single quote can be retrieved from the database using the
+     * A test to check that a single quote can be retrieved from the database using the
      * getQuote method
      * @throws StockServiceException
      */
@@ -53,12 +56,12 @@ public class DatabaseStockServiceTest {
     public void testGetQuote() throws StockServiceException {
         String symbol = "APPL";
         StockQuote stockQuote = databaseStockService.getQuote(symbol);
-        assertNotNull("Verify can retrieve a stock quote from the database.", stockQuote);
+        assertNotNull("Verify a stock quote can be retrieved from the database.", stockQuote);
         assertEquals("Make sure the symbols match.", symbol, stockQuote.getSymbol());
     }
 
     /**
-     * Tests that there are no records retrieved from the database with a symbol
+     * A test to check that there are no records retrieved from the database with a symbol
      * that is known to not be present
      * @throws StockServiceException
      */
@@ -66,8 +69,8 @@ public class DatabaseStockServiceTest {
     public void testGetQuoteNegative() throws StockServiceException{
         String symbol = "JKLD";
         StockQuote stockQuote = databaseStockService.getQuote(symbol);
-        assertNotNull("Verify can retrieve a stock quote from the database.", stockQuote);
-        assertTrue("Ensure no records for the given symbol", stockQuote.getSymbol().isEmpty());
+        assertNotNull("Verify a stock quote can be retrieved from the database.", stockQuote);
+        assertTrue("Ensure there are no records for the given symbol.", stockQuote.getSymbol().isEmpty());
     }
 
     /**
@@ -86,14 +89,14 @@ public class DatabaseStockServiceTest {
         Calendar untilCalendar = convertStringToDate(untilDate);
 
         List<StockQuote> stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar);
-        assertNotNull("Verify can retrieve a stock quote from the database.", stockQuotes);
-        assertFalse("Ensure that the list of stockQuotes are not empty.", stockQuotes.isEmpty());
+        assertNotNull("Verify a stock quote can be retrieved from the database.", stockQuotes);
+        assertFalse("Ensure the list of stockQuotes is not empty.", stockQuotes.isEmpty());
     }
 
     /**
-     * Test that list of stock quotes retrieved from the database is empty when
+     * A test that checks that the list of stock quotes retrieved from the database is empty when
      * give symbol/dates that are known to not be present in the database
-     * with the getQuote method  when passing in a symbol, and from and until dates.
+     * with the getQuote method when passing in a symbol, and from and until dates.
      * @throws ParseException
      * @throws StockServiceException
      */
@@ -107,11 +110,11 @@ public class DatabaseStockServiceTest {
         Calendar untilCalendar = convertStringToDate(untilDate);
 
         List<StockQuote> stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar);
-        assertTrue("Ensure that the list of stockQuotes are empty.", stockQuotes.isEmpty());
+        assertTrue("Ensure the list of stockQuotes is empty.", stockQuotes.isEmpty());
     }
 
     /**
-     * Tests that a list of stock quotes are able to be retrieved from the database
+     * A test that checks a list of stock quotes are able to be retrieved from the database
      * with the getQuote method  when passing in a symbol, from and until dates, and interval.
      * @throws ParseException
      * @throws StockServiceException
@@ -126,12 +129,12 @@ public class DatabaseStockServiceTest {
         Calendar untilCalendar = convertStringToDate(untilDate);
 
         List<StockQuote> stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar, IntervalEnum.HOUR);
-        assertNotNull("Verify can retrieve a stock quote from the database.", stockQuotes);
-        assertFalse("Ensure that the list of stockQuotes are not empty.", stockQuotes.isEmpty());
+        assertNotNull("Verify a stock quote can be retrieved from the database.", stockQuotes);
+        assertFalse("Ensure the list of stockQuotes is not empty.", stockQuotes.isEmpty());
     }
 
     /**
-     * Tests that the list of stock quotes retrieved from the database are empty when
+     * A tests that checks the list of stock quotes retrieved from the database is empty when
      * given symbol/dates that are known to not be present in the database
      * with the getQuote method  when passing in a symbol, from/until dates, and interval.
      * @throws ParseException
@@ -147,8 +150,8 @@ public class DatabaseStockServiceTest {
         Calendar untilCalendar = convertStringToDate(untilDate);
 
         List<StockQuote> stockQuotes = databaseStockService.getQuote(symbol, fromCalendar, untilCalendar, IntervalEnum.HOUR);
-        assertNotNull("Verify can retrieve a stock quote from the database.", stockQuotes);
-        assertTrue("Ensure the list of stockQuotes are empty", stockQuotes.isEmpty());
+        assertNotNull("Verify a stock quote can be retrieved from the database.", stockQuotes);
+        assertTrue("Ensure list of stockQuotes is empty.", stockQuotes.isEmpty());
     }
 
     /**

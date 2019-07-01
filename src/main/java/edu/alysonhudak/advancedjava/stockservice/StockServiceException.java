@@ -2,6 +2,8 @@ package edu.alysonhudak.advancedjava.stockservice;
 
 /**
  * Used to signal if there is a problem with the StockService.
+ *
+ * @author Alyson Hudak
  */
 public class StockServiceException extends Exception {
 
@@ -21,10 +23,9 @@ public class StockServiceException extends Exception {
      * cause.
      *
      * @param message the detailed message
-     *
      * @since 1.4
      */
-    StockServiceException(String message, Throwable cause) {
+    public StockServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 }
