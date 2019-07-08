@@ -1,4 +1,4 @@
-package edu.alysonhudak.advancedjava.model;
+package edu.alysonhudak.advancedjava.model.database;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -6,6 +6,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Models the Quotes table
@@ -13,12 +17,22 @@ import javax.persistence.Id;
  * @author Alyson Hudak
  */
 @Entity
-public class Quotes {
+@Table(name = "quotes", catalog = "stocks")
+public class Quotes implements DatabasesAccessObject {
 
     private int id;
     private String symbol;
     private Timestamp time;
     private BigDecimal price;
+
+    public Quotes(){
+    }
+
+    public Quotes(Stock stock){
+        this.symbol = stock.getSymbol();
+        this.time = convertStringToTimestamp(stock.getTime());
+        this.price = convertStringToBigDecimal(stock.getPrice());
+    }
 
     /**
      * Primary Key - Unique ID for a particular row in the quotes table.
@@ -27,7 +41,8 @@ public class Quotes {
      */
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true)
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
@@ -147,5 +162,29 @@ public class Quotes {
                 ", time='" + time + '\'' +
                 ", price=" + price +
                 '}';
+    }
+    public static Timestamp convertStringToTimestamp(String dateEntered){
+        /**
+         * Create a new instance of SimpleDateFormat that will be used to
+         * parse the string arguments to obtain desired start and end dates
+         */
+        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = simpleDateFormatter.parse(dateEntered);
+        } catch (ParseException ex) {
+            System.out.println("Incorrect format for date. System will exit.");
+            System.exit(1);
+        }
+        Timestamp convertedDate = new Timestamp(date.getTime());
+
+        return convertedDate;
+    }
+
+    public static BigDecimal convertStringToBigDecimal(String priceEntered){
+
+        BigDecimal convertedPrice = new BigDecimal(priceEntered);
+
+        return convertedPrice;
     }
 }

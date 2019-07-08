@@ -1,4 +1,4 @@
-package edu.alysonhudak.advancedjava.model;
+package edu.alysonhudak.advancedjava.model.database;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="person")
-public class Person {
+public class Person implements DatabaseAccessObject{
 
     private int id;
     private String firstName;

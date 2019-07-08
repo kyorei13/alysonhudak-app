@@ -1,8 +1,8 @@
 package edu.alysonhudak.advancedjava.stockservice;
 
-import edu.alysonhudak.advancedjava.model.Person;
-import edu.alysonhudak.advancedjava.model.PersonQuotes;
-import edu.alysonhudak.advancedjava.model.Quotes;
+import edu.alysonhudak.advancedjava.model.database.Person;
+import edu.alysonhudak.advancedjava.model.database.PersonQuotes;
+import edu.alysonhudak.advancedjava.model.database.Quotes;
 import edu.alysonhudak.advancedjava.util.DatabaseUtils;
 
 import java.util.ArrayList;
