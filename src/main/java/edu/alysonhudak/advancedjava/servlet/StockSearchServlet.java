@@ -29,7 +29,7 @@ import java.util.List;
  * @author Alyson Hudak
  */
 
-public class StockSearch extends HttpServlet {
+public class StockSearchServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(StockSearch.class.getName());
 
