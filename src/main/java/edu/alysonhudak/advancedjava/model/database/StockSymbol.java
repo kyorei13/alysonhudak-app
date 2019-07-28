@@ -1,6 +1,5 @@
 package edu.alysonhudak.advancedjava.model.database;
 
-import edu.KaylaKornelis.advancedjava.Assignment7.Xml.Stock;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
