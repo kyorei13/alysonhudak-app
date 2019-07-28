@@ -1,0 +1,31 @@
+package edu.alysonhudak.advancedjava.util;
+
+
+/**
+ * Enums specify the intervals that may be wanted in the stock application
+ *
+ * @author Alyson Hudak
+ */
+
+public enum Interval {
+
+    MINUTE(1), HOUR(60), HALF_DAY(60 * 6), DAY(60 * 24);
+
+    private int minutes;
+
+    /**
+     * Create a new  Interval enumeration.
+     * @param minutes the number of minutes in the interval
+     */
+    private Interval(int minutes) {
+        this.minutes = minutes;
+    }
+
+    /**
+     *
+     * @return the number of minutes in the interval
+     */
+    public int getMinutes() {
+        return minutes;
+    }
+}
