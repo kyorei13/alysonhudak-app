@@ -1,28 +1,32 @@
 package edu.alysonhudak.advancedjava.stockservice;
 
 /**
- * Returns a concrete implementations of the interface
+ * Returns a concrete implementation of the interface
  *
  * @author Alyson Hudak
  */
 
 public class StockServiceFactory {
 
+    /**
+     * Prevent instantiations
+     */
     private StockServiceFactory() {}
-
-    private static StockService service;
 
     /**
      *
-     * @return a basic stock service
+     * @return get a <CODE>StockService</CODE> instance
      */
-    public static StockService getInstance() {
+    public static StockService getStockServiceInstance() {
+        return new DatabaseStockService();
+    }
 
-        synchronized (StockServiceFactory.class) {
-            if (service == null) {
-                service = new BasicStockService();
-            }
-            return service;
-        }
+    /**
+     *
+     * @return get a <CODE>PersonService</CODE> instance
+     */
+    public static PersonService getPersonServiceInstance() {
+        return new DatabasePersonService();
     }
 }
+© 2019 GitHub, Inc.
